@@ -1,8 +1,10 @@
 # 파이썬 클래스
-# 파이썬 method는 항상 첫 번째 파라미터로 self 사용
-#   인자가 필요없을 때에도 self는 사용
-# 클래스의 attribute는 내부에서 접근시, self.attribute명 으로 접근
 
+ - 파이썬 method는 항상 첫 번째 파라미터로 self 사용
+    - 인자가 필요없을 때에도 self는 사용
+ - 클래스의 attribute는 내부에서 접근시, self.attribute명 으로 접근
+
+```python
 class Square():
     height = 0
     width = 0
@@ -51,3 +53,4 @@ s = Quardangle(1,1,'aa')
 print(s)
 del s
 print(s)
+```
