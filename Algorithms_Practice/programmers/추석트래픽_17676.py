@@ -1,86 +1,45 @@
 '''
 https://programmers.co.kr/learn/courses/30/lessons/17676?language=python3
 '''
-
-'''
-import math
-
-def solution(lines):
-    answer = 0
-
-    first_log = lines[0].split(' ')
-    start_times = first_log[1].split(':')
-    start_times = (int)(start_times[0])*3600 + (int)(start_times[1])*60 + (float)(start_times[2])
-    start_times = math.ceil(((float)(format(start_times+0.001,'.3f')) - (float)(first_log[2][:-1])))
-
-    last_log = lines[-1].split(' ')
-    end_times = last_log[1].split(':')
-    end_times = (int)(end_times[0])*3600 + (int)(end_times[1])*60 + math.trunc((float)(end_times[2]))
-    if start_times == end_times:
-        return 1
-    for i in range(start_times, end_times+1):
-        count = 0
-        for log in lines:
-            tr_end_time = log.split(' ')[1].split(':')
-            tr_end_time = (int)(tr_end_time[0]) * 3600 + (int)(tr_end_time[1]) * 60 + (float)(tr_end_time[2])
-            tr_st_time = convertToTrStTimeSnds(tr_end_time, log.split(' ')[2][:-1])
-            if (tr_st_time >= i and tr_st_time < i+1) or (tr_st_time < i and tr_end_time < i+1):
-                count += 1
-
-        if answer < count:
-            answer = count
-    print(answer)
-    return answer
-
-def convertToTrStTimeSnds(end_time, pro_time):
-    tr_st_time = end_time + 0.001 - (float)(pro_time)
-    return tr_st_time
-'''
-
 from decimal import Decimal
 def solution(lines):
     answer = 1
 
     tmp = [(
-        (int)(i.split(' ')[1].split(':')[0])*3600 + (int)(i.split(' ')[1].split(':')[1])*60 + Decimal(i.split(' ')[1].split(':')[2]) + Decimal('0.001') - Decimal(i.split(' ')[2][:-1]),
-            (int)(i.split(' ')[1].split(':')[0])*3600 + (int)(i.split(' ')[1].split(':')[1])*60 + Decimal(i.split(' ')[1].split(':')[2])
-    ) for i in lines] #(start, end)
-    print(tmp)
+        (int)(i.split(' ')[1].split(':')[0]) * 3600 + (int)(i.split(' ')[1].split(':')[1]) * 60 + Decimal(
+            i.split(' ')[1].split(':')[2]) + Decimal('0.001') - Decimal(i.split(' ')[2][:-1]),
+        (int)(i.split(' ')[1].split(':')[0]) * 3600 + (int)(i.split(' ')[1].split(':')[1]) * 60 + Decimal(
+            i.split(' ')[1].split(':')[2])
+    ) for i in lines]  # (start, end)
+    # print(tmp)
+
+    #     for log1 in tmp:
+    #         chkSt = log1[0] - Decimal('0.0001')
+    #         chkEd = log1[0] + 1
+    #         # chkSt = log1[0]
+    #         # chkEd = log1[0] + Decimal('0.9999')
+
+    #         maxProcess = 0
+    #         for log2 in tmp:
+    #             if log2[0] < chkEd and log2[1] > chkSt:
+    #                 maxProcess += 1
+    #             # elif chkSt < log2[1] < chkEd:
+    #             #     maxProcess += 1
+    #         answer = maxProcess if answer < maxProcess else answer
+    #     print(answer)
 
     for log1 in tmp:
-        chkSt = log1[0] - Decimal('0.0001')
-        chkEd = log1[0] + 1
-        # chkSt = log1[0]
-        # chkEd = log1[0] + Decimal('0.9999')
+        chkSt = log1[1] - Decimal('0.001')
+        chkEd = log1[1] + 1
 
         maxProcess = 0
         for log2 in tmp:
             if log2[0] < chkEd and log2[1] > chkSt:
                 maxProcess += 1
-            # elif chkSt < log2[1] < chkEd:
-            #     maxProcess += 1
-        answer = maxProcess if answer < maxProcess else answer
-    print(answer)
 
-    # for log1 in tmp:
-    #     chkSt = log1[1] - Decimal('0.001')
-    #     chkEd = log1[1] + 1
-    #     # chkSt = log1[0]
-    #     # chkEd = log1[0] + Decimal('0.9999')
-    #
-    #     maxProcess = 0
-    #     for log2 in tmp:
-    #         if log2[0] < chkEd and log2[1] > chkSt:
-    #             maxProcess += 1
-    #         # elif chkSt < log2[1] < chkEd:
-    #         #     maxProcess += 1
-    #
-    #     answer  = maxProcess if answer < maxProcess else answer
+        answer = maxProcess if answer < maxProcess else answer
 
     return answer
-    # print(answer)
-
-
 
 # solution([
 # '2016-09-15 01:00:04.001 2.0s',
