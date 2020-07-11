@@ -1,0 +1,18 @@
+'''
+https://www.acmicpc.net/problem/10930
+문제
+문자열 S가 주어졌을 때, SHA-256 해시값을 구하는 프로그램을 작성하시오.
+'''
+import hashlib
+
+def solution(input):
+    input = input.encode('utf-8')
+    hashSHA = hashlib.sha256()
+    hashSHA.update(input)
+    hexSHA256 = hashSHA.hexdigest()
+
+    return hexSHA256
+
+S = input() # Baekjoon
+print(solution(S)) # 9944e1862efbb2a4e2486392dc6701896416b251eccdecb8332deb7f4cf2a857
+
