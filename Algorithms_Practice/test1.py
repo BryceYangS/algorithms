@@ -1,14 +1,24 @@
-# you can write to stdout for debugging purposes, e.g.
-# print("this is a debug message")
 
-def solution(A, B):
-    bin_ab = bin(A*B)[2:]
-    answer = 0
-    for char in bin_ab:
-        if char == '1':
-            answer += 1
+import sys
 
-    return answer
+n = int(input())
+cranes = list(map(int,input().split()))
 
+m = int(input())
+boxes = list(map(int, input().split()))
 
-print(solution(3, 7))
+if max(cranes) < max(boxes):
+    print(-1)
+    sys.exit()
+
+cranes.sort(reverse=True)
+boxes.sort(reverse=True)
+
+result = 0
+count = 0
+for box in range(count, len(boxes)):
+
+    for crane in cranes:
+        if box <= crane:
+            count += 1
+            break
